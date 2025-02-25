@@ -14,7 +14,7 @@
         # gcc 12.3.0
         import (builtins.fetchTarball {
           url = "https://github.com/NixOS/nixpkgs/archive/c407032be28ca2236f45c49cfb2b8b3885294f7f.tar.gz";
-          sha256 = "07gzgcgaclgand7j99w45r07gc464b5jbpaa3wmv6nzwzdb3v3q4";
+          sha256 = "1a95d5g5frzgbywpq7z0az8ap99fljqk3pkm296asrvns8qcv5bv";
         }) { inherit system; };
       # binutils 2.40
       pkgs-binutils = (
@@ -27,7 +27,7 @@
       pkgs-glibc = (
         import (builtins.fetchTarball {
           url = "https://github.com/NixOS/nixpkgs/archive/67b4bf1df4ae54d6866d78ccbd1ac7e8a8db8b73.tar.gz";
-          sha256 = "1q2fn8szx99narznglglsdpc6c4fj1mhrl42ig02abjqfikl723i";
+          sha256 = "07gzgcgaclgand7j99w45r07gc464b5jbpaa3wmv6nzwzdb3v3q4";
         }) { inherit system; }
       );
       gcc12_3_0 = pkgs-gcc.gcc;
@@ -35,7 +35,7 @@
       glibc2_38 = pkgs-glibc.glibc;
     in
     {
-      devShells.${system}.default = pkgs.callPackage ./nix/devShell.nix {
+      devShell.${system} = pkgs.callPackage ./nix/devShell.nix {
         inherit gcc12_3_0 binutils2_40 glibc2_38;
       };
     };
