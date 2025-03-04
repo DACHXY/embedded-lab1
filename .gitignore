@@ -1,1 +1,12 @@
 .direnv
+binutils-*
+build_*
+cross*
+linux
+glibc-*
+gcc-*
+sysroot
+*.s
+*.html
+*.pdf
+
