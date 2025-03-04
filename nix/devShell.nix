@@ -1,37 +1,59 @@
 {
-  lib,
-  mkShell,
   gcc,
   gmp,
   mpfr,
   libmpc,
   bison,
+  glibc,
+  binutils,
   git,
+  texinfo,
   isl,
+  stdenv,
+  buildFHSEnv,
+  dejagnu,
+  autogen,
+  flex,
+  m4,
+  zlib,
+  xz,
+  libxcrypt,
+  libffi,
 }:
 let
-  rpathLibs = [
-    gmp
-    mpfr
-    libmpc
-    isl
-  ];
+  fhsEnv = buildFHSEnv {
+    name = "lab1-gcc";
+    targetPkgs =
+      ps: with ps; [
+        gmp
+        gmp.dev
+        isl
+        libmpc
+        mpfr
+        mpfr.dev
+        libffi
+        libffi.dev
+        libxcrypt
+        bison
+        xz
+        xz.dev
+        zlib
+        zlib.dev
+        m4
+        bison
+        flex
+        texinfo
+        gcc
+        stdenv.cc
+        stdenv.cc.libc
+        stdenv.cc.libc_dev
+        git
+        dejagnu
+        autogen
+        binutils
+        glibc
+        glibc.dev
+      ];
+  };
 in
-mkShell {
-  name = "lab1";
-
-  packages = [
-    gcc
-    git
-    gmp
-    mpfr
-    libmpc
-    bison
-    isl
-  ];
-
-  LD_LIBRARY_PATH = lib.makeLibraryPath rpathLibs;
-  shellHook = ''
-    unset CC CXX OBJCOPY
-  '';
-}
+fhsEnv.env

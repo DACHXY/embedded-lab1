@@ -12,7 +12,7 @@ Cross Toolchain for Raspberry Pi
 
 ## 實驗目的
 
-Cross build Linux kernel 至 `arm-linux-gnueabihf` 目標機器
+Cross build Toolchain (gcc, binutils, glibc) 至 `arm-linux-gnueabihf` 目標機器
 
 ## 實驗步驟
 
@@ -43,10 +43,9 @@ make install
 ### Build a bare-metal cross compiler
 
 ```bash
+export PATH="$PWD/../crossgcc1/bin:$PATH"
 mkdir build_gcc && cd build_gcc
 
-CFLAGS="-Wno-error=format-security" \
-CXXFLAGS="-Wno-error=format-security" \
 ../gcc-12.3.0/configure \
 --prefix=/home/danny/projects/embedded-lab1/crossgcc1 \
 --target=arm-linux-gnueabihf \
@@ -55,6 +54,7 @@ CXXFLAGS="-Wno-error=format-security" \
 --with-arch=armv6 --disable-shared \
 --enable-static --disable-decimal-float \
 --disable-libgomp --disable-libitm \
+--disable-libquadmath --disable-libsnitizer \
 --disable-libssp --disable-threads \
 --with-float=hard --with-fpu=vfp
 
@@ -80,6 +80,8 @@ mkdir build_glibc && cd build_glibc
 --target=arm-linux-gnueabihf \
 --with-headers=/home/danny/projects/embedded-lab1/sysroot/usr/include \
 --includedir=/usr/include \
+--enable-add-ons \
+--disable-multilib \
 CXX=arm-linux-gnueabihf-g++
 
 make
@@ -104,10 +106,9 @@ make install
 ### Build a Cross Compiler
 
 ```bash
+export PATH="$PWD/../crossgcc2/bin:$PATH"
 mkdir build_gcc2 && cd build_gcc2
 
-CFLAGS="-Wno-error=format-security" \
-CXXFLAGS="-Wno-error=format-security" \
 ../gcc-12.3.0/configure \
 --prefix=/home/danny/projects/embedded-lab1/crossgcc2 \
 --target=arm-linux-gnueabihf \
