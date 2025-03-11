@@ -1,6 +1,8 @@
 .direnv
 binutils-*
 build_*
+gdb-*
+*.exe
 cross*
 linux
 glibc-*
@@ -9,4 +11,3 @@ sysroot
 *.s
 *.html
 *.pdf
-

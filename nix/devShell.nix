@@ -19,6 +19,9 @@
   xz,
   libxcrypt,
   libffi,
+  ncurses5,
+  qemu-user,
+  expat,
 }:
 let
   fhsEnv = buildFHSEnv {
@@ -53,7 +56,16 @@ let
         binutils
         glibc
         glibc.dev
+        ncurses5
+        ncurses5.dev
+        qemu-user
+        expat
+        expat.dev
       ];
+
+    profile = ''
+      export PATH="/home/danny/projects/embedded-lab1/crossgcc2/bin:$PATH"
+    '';
   };
 in
 fhsEnv.env
