@@ -63,9 +63,9 @@ let
         expat.dev
       ];
 
-    profile = ''
-      export PATH="/home/danny/projects/embedded-lab1/crossgcc2/bin:$PATH"
-    '';
+    profile =
+      # bash
+      '''';
   };
 in
 fhsEnv.env

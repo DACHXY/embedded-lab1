@@ -11,3 +11,4 @@ sysroot
 *.s
 *.html
 *.pdf
+buildroot
